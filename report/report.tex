@@ -1,0 +1,110 @@
+\documentclass{beamer}
+% Преамбула
+\title{My Super Topic}
+\author{Ashot and Alice}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}     
+\usepackage[english,russian]{babel} 
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+\begin{document}
+
+\begin{frame}
+\thispagestyle{empty}
+\centerline{Московский государственный университет}
+\vfill
+\centerline{Факультет вычислительной математики и кибернетики}
+\vfill
+\vfill
+\vfill
+\vfill
+\Large
+\begin{centering}
+{\bfseries "Численное решение краевой задачи Дирихле для уравнения Лапласа"}
+\end{centering}
+\normalsize
+\vfill
+\vfill
+\vfill
+\begin{flushright}
+Студент: Бурцев Леонид\\
+Группа: 303
+\end{flushright}
+\vfill
+\vfill
+\centerline{Москва}
+\centerline{2023}
+\pagebreak
+\end{frame}
+
+\begin{frame}
+\textbf{Описание исходной задачи}
+\newline
+Необходимо решить краевую задачу Дирихле для уравнения Лапласа
+
+\begin{equation*}
+ \begin{cases}
+   -u'' = f\\
+   u(0) = a, u(1) = b 
+ \end{cases}
+\end{equation*}
+численно с помощью метода конечных разностей.
+\newline
+Решаем задачу на интервале $(0, 1)$, вводя на ней равномерную сетку $x_0, x_1, ..., x_N$,
+$x_i = i * h$,
+$h = \frac{1}{N}$
+Дискретная аппроксимация уравнения:
+$$\frac{y_{i-1}-2y_i+y_{i+1}}{h^{2}} = f(x_i)$$
+
+для приграничных узлов $(x_1, x_{N-1})$
+сюда войдут граничные условия
+\end{frame}
+
+\begin{frame}
+\textbf{Метод прогонки: }
+\newline
+Определим $a_i$ как элементы стоящие на поддиагонали в $i$-ой строке
+\newline
+Определим $b_i$ как элементы стоящие на диагонали в $i$-ой строке
+\newline
+Определим $c_i$ как элементы стоящие на наддиагонали в $i$-ой строке
+\newline
+Определим $d_i$ как элемент правой части в $i$-ой строке
+\newline
+
+Прямая прогонка состоит в вычислении прогоночных коэффициентов $\alpha_i$ и $\beta_i$ , где $i$ – номер строки матрицы. Этот этап выполняется при $i = 1...n$ строго по возрастанию значения $i$.
+
+1)В первой строке матрицы $i = 1$ используются формулы:
+\[\mathbf{y_1=b_1, \alpha_1=\frac{-c_1}{y_1}, \beta_1=\frac{d_1}{y_1}}\]
+\end{frame}
+
+\begin{frame}
+2) Для строк $i$ от $2$ до $N-2$ используются рекуррентные формулы:
+\[\mathbf{y_i=b_i+a_i*\alpha_{i-1}, \alpha_i=\frac{-c_i}{y_i}, \beta_i=\frac{(d_i-a_i*\beta_{i-1})}{y_i}}\]
+3) При $i = N - 1$ прямая прогонка завершается вычислением: 
+\[\mathbf{y_{N-1}=b_{N-1}+a_{N-1}*\alpha_{N-2}, \beta_{N-1}=\frac{(d_{N-1}-a_{N-1}*\beta_{N-2})}{y_{N-1}}}\]
+
+После этого производится обратная прогонка, в которой происходит вычисление неизвестных $yi$. Этот этап выполняется при $i = n...1$ строго по
+убыванию значения $i$.
+
+4) В последней строке матрицы $i = N - 1$ выполнено $x_{N-1} = \beta_{N-1}$
+\newline
+5) Для всех остальных строк при $i$ от $N-2$ до $1$ применяется формула:
+\[\mathbf{x_i=\alpha_i*x_{i+1}+\beta_{i}}\]
+\end{frame}
+
+\begin{frame}
+\textbf{Для функции $u=sin(\pi(x))$ графики зависимости точности с-нормы и дискретной l2-нормы от шага сетки в логарифмическом виде выглядят следующим образом}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{Снимок экрана 2024-02-24 в 02.27.57.png}
+    \caption{Enter Caption}
+    \label{fig:enter-label}
+\end{figure}
+\end{frame}
+\end{document}
+
