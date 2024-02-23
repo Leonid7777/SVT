@@ -1,0 +1,1 @@
+void find_sol(int N, double* x, double* r_part);
