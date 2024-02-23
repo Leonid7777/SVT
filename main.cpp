@@ -1,12 +1,6 @@
 #include <iostream>
 #include <cmath>
 
-namespace {
-    const double A = -1.0;
-    const double B = 2;
-    const double M_C = 1.0;
-}
-
 void
 create_right_part(int N, double* r_part)
 {
