@@ -1,5 +1,5 @@
 add_executable(test
-  main.cpp
+  tridiag_mat_alg.cpp
   test.cpp
   test.h
 )

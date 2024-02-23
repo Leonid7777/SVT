@@ -1,6 +1,6 @@
 target_sources(${CMAKE_PROJECT_NAME}
   PRIVATE
-  create.cpp
+  create_right_part.cpp
   solver.cpp
 )
 

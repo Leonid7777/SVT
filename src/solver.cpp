@@ -12,7 +12,7 @@ find_sol(int N, double* x, double* r_part)
     y[1] = B;
     alpha[1] = M_C / y[1];
     betta[1] = r_part[1] / y[1];
-
+    
     for(int i = 2; i < N - 1; i++) {
         y[i] = B + A * alpha[i - 1];
         alpha[i] = M_C / y[i];
