@@ -16,6 +16,6 @@ test_function(int N, double* x)
         }
     }
 
-    std::cout << "l2_norm: " << sqrt(l2_norm) << std::endl;
+    std::cout << "l2_norm: " << sqrt(l2_norm) / N << std::endl;
     std::cout << "c_norm: " << c_norm<< std::endl;
 }

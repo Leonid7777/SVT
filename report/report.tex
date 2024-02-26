@@ -57,7 +57,7 @@
 $x_i = i * h$,
 $h = \frac{1}{N}$
 Дискретная аппроксимация уравнения:
-$$\frac{y_{i-1}-2y_i+y_{i+1}}{h^{2}} = f(x_i)$$
+$$-\frac{y_{i-1}-2y_i+y_{i+1}}{h^{2}} = f(x_i)$$
 
 для приграничных узлов $(x_1, x_{N-1})$
 сюда войдут граничные условия
@@ -101,10 +101,16 @@ $$\frac{y_{i-1}-2y_i+y_{i+1}}{h^{2}} = f(x_i)$$
 
 \begin{figure}
     \centering
-    \includegraphics[width=1\linewidth]{Снимок экрана 2024-02-24 в 02.27.57.png}
+    \includegraphics[width=0.99\linewidth]{Снимок экрана 2024-02-26 в 12.56.43.png}
     \caption{Enter Caption}
     \label{fig:enter-label}
 \end{figure}
+
+\end{frame}
+
+\begin{frame}
+\textbf{Сходимость l2-нормы: $O(0.82 * h^{2.5})$}    
+\newline
+\textbf{Сходимость c-нормы: $O(0.91* h^{2})$}    
 \end{frame}
 \end{document}
-
